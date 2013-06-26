@@ -1,11 +1,10 @@
 name    'scarcemedia-observium'
 version '0.0.1'
-source 'UNKNOWN'
 author 'Jeremy Custenborder'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary 'Puppet module to maintain configuration and jobs for observium.'
+description 'Installation and configuration for the observium project. http://www.observium.com'
+project_page 'https://github.com/ScarceMedia/puppet-observium'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
