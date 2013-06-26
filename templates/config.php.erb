@@ -1,0 +1,44 @@
+<%-
+
+s = StringIO.new
+
+def generate(s, hash, prefix=nil)
+  hash.sort.each do |key, value|
+    if prefix.nil?
+      prefix = "$config"
+    end
+
+    my_prefix = "#{prefix}['#{key}']"
+
+    if value.is_a?(Array)
+      s << "#{my_prefix} = array("
+
+      i=0
+      value.each do |v|
+        s << "'#{v}'"
+        if i < value.length-1
+          s << ', '
+        end
+
+        i+=1
+      end 
+      s << ");\n"
+    elsif value.is_a?(Hash)
+      generate(s, value, my_prefix)
+    elsif value.is_a?(String)
+      s << "#{my_prefix} = '#{value}';\n"
+    else
+      s << "#{my_prefix} = #{value};\n"
+    end
+  end
+end
+
+generate(s, @settings)
+
+-%>
+<?php
+/*
+This file is maintained by puppet. Changes to this file will
+be reverted during the next puppet run.
+*/
+<%= s.string %>
