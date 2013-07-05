@@ -35,8 +35,7 @@
 #
 # Copyright 2013 Your name here, unless otherwise noted.
 #
-class observium($install_path, $settings, $revision=unset) {
-  include ::observium::params
+class observium($install_path, $settings, $revision=unset) inherits observium::params {
   validate_absolute_path($install_path)
   validate_hash($settings)
 
