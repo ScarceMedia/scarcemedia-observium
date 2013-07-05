@@ -36,7 +36,7 @@
 # Copyright 2013 Your name here, unless otherwise noted.
 #
 class observium($install_path, $revision=unset) {
-  validate_absolutepath($install_path)
+  validate_absolute_path($install_path)
 
   #ensure_resource( 'file', $install_path, 
   #  {
@@ -49,5 +49,5 @@ class observium($install_path, $revision=unset) {
     provider => svn,
     source   => 'http://www.observium.org/svn/observer/trunk/',
     revision => $revision
-  }
+  } 
 }
