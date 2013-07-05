@@ -43,27 +43,120 @@ class observium($install_path, $settings, $revision=unset) inherits observium::p
 
   case $::osfamily {
     'RedHat': {
-      package{['php', 
-        'php-mysql', 
-        'php-gd', 
-        'php-snmp', 
-        'vixie-cron', 
-        'php-pear', 
-        'net-snmp', 
-        'net-snmp-utils', 
-        'graphviz', 
-        'subversion',
-        'rrdtool',
-        'fping', 
-        'ImageMagick', 
-        'jwhois',
-        'nmap',
-        'OpenIPMI-tools',
-        'php-pear',
-        'MySQL-python']:
-        ensure => installed,
-        before => Exec['observium-update-database'] 
+      if !defined(Package['php']) {
+        package{'php':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
       }
+      if !defined(Package['php-mysql']) {
+        package{'php-mysql':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['php-gd']) {
+        package{'php-gd':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['php-snmp']) {
+        package{'php-snmp':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['vixie-cron']) {
+        package{'vixie-cron':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['php-pear']) {
+        package{'php-pear':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['net-snmp']) {
+        package{'net-snmp':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['net-snmp-utils']) {
+        package{'net-snmp-utils':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['graphviz']) {
+        package{'graphviz':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['subversion']) {
+        package{'subversion':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['mysql']) {
+        package{'mysql':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['rrdtool']) {
+        package{'rrdtool':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['fping']) {
+        package{'fping':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['ImageMagick']) {
+        package{'ImageMagick':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['jwhois']) {
+        package{'jwhois':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['nmap']) {
+        package{'nmap':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['OpenIPMI-tools']) {
+        package{'OpenIPMI-tools':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['php-pear']) {
+        package{'php-pear':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }
+      if !defined(Package['MySQL-python']) {
+        package{'MySQL-python':
+          ensure => installed,
+          before => Exec['observium-update-database']
+        }
+      }    
     }
     default: {
       fail("${::osfamily} is not supported")
