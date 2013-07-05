@@ -35,19 +35,35 @@
 #
 # Copyright 2013 Your name here, unless otherwise noted.
 #
-class observium($install_path, $revision=unset) {
+class observium($install_path, $settings, $revision=unset) {
+  include ::observium::params
   validate_absolute_path($install_path)
+  validate_hash($config_hash)
 
-  #ensure_resource( 'file', $install_path, 
-  #  {
-  #    'ensure' => 'directory'
-  #  }
-  #)
+  $config_path = "${install_path}/config.php"
+
+  ensure_packages($::observium::params::packages)
+
+  exec{'observium-update-database':
+    command     => "${install_path}/discovery.php -h none",
+    refreshonly => true,
+    require     => File[$config_path]
+  }
 
   vcsrepo { $install_path:
     ensure   => present,
     provider => svn,
     source   => 'http://www.observium.org/svn/observer/trunk/',
-    revision => $revision
-  } 
+    revision => $revision, 
+    notify   => Exec['observium-update-database']
+  }
+
+  file{$config_path:
+    ensure  => present,
+    #owner  => 'root',
+    #group  => 'root',
+    mode    => '0644',
+    content => template('observium/config.php.erb'), 
+    require => Vcsrepo[$install_path]
+  }
 }
