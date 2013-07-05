@@ -43,8 +43,7 @@ class observium($install_path, $settings, $revision=unset) inherits observium::p
 
   case $::osfamily {
     'RedHat': {
-      ensure_resource('package', 
-        ['php', 
+      package{['php', 
         'php-mysql', 
         'php-gd', 
         'php-snmp', 
@@ -61,12 +60,10 @@ class observium($install_path, $settings, $revision=unset) inherits observium::p
         'nmap',
         'OpenIPMI-tools',
         'php-pear',
-        'MySQL-python'], 
-        {
-          'ensure' => 'installed',
-          'before' => 'Exec["observium-update-database"]'
-        }
-      )
+        'MySQL-python']:
+        ensure => installed,
+        before => Exec['observium-update-database'] 
+      }
     }
     default: {
       fail("${::osfamily} is not supported")
