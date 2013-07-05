@@ -37,7 +37,7 @@
 #
 class observium($install_path, $config_hash, $revision=unset) inherits observium::params {
   validate_absolute_path($install_path)
-  validate_hash($settings)
+  validate_hash($config_hash)
 
   $defaults = {
     'fping' => $::osfamily ? {
