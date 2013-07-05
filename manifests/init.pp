@@ -35,7 +35,19 @@
 #
 # Copyright 2013 Your name here, unless otherwise noted.
 #
-class observium {
+class observium($install_path, $revision=unset) {
+  validate_absolutepath($install_path)
 
+  #ensure_resource( 'file', $install_path, 
+  #  {
+  #    'ensure' => 'directory'
+  #  }
+  #)
 
+  vcsrepo { $install_path:
+    ensure   => present,
+    provider => svn,
+    source   => 'http://www.observium.org/svn/observer/trunk/',
+    revision => $revision
+  }
 }
