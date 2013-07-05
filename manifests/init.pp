@@ -42,7 +42,7 @@ class observium($install_path, $settings, $revision=unset) {
 
   $config_path = "${install_path}/config.php"
 
-  ensure_resource('package', $::observium::params::packages, {'ensure' => 'present'})
+  ensure_resource('package', getvar('::observium::params::packages'), {'ensure' => 'present'})
 
   exec{'observium-update-database':
     command     => "${install_path}/discovery.php -h none",
