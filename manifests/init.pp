@@ -38,7 +38,7 @@
 class observium($install_path, $settings, $revision=unset) {
   include ::observium::params
   validate_absolute_path($install_path)
-  validate_hash($config_hash)
+  validate_hash($settings)
 
   $config_path = "${install_path}/config.php"
 
