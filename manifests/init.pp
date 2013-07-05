@@ -35,9 +35,22 @@
 #
 # Copyright 2013 Your name here, unless otherwise noted.
 #
-class observium($install_path, $settings, $revision=unset) inherits observium::params {
+class observium($install_path, $config_hash, $revision=unset) inherits observium::params {
   validate_absolute_path($install_path)
   validate_hash($settings)
+
+  $defaults = {
+    'fping' => $::osfamily ? {
+      'RedHat' => '/usr/sbin/fping',
+      default  => '/usr/bin/fping'
+    }, 
+    'fping6' => $::osfamily ? {
+      'RedHat' => '/usr/sbin/fping6',
+      default  => '/usr/bin/fping6'
+    },
+  }
+
+  $settings = merge($defaults, $config_hash)
 
   $config_path = "${install_path}/config.php"
 
