@@ -67,12 +67,6 @@ class observium($install_path, $settings, $revision=unset) inherits observium::p
           before => Exec['observium-update-database']
         }
       }
-      if !defined(Package['vixie-cron']) {
-        package{'vixie-cron':
-          ensure => installed,
-          before => Exec['observium-update-database']
-        }
-      }
       if !defined(Package['php-pear']) {
         package{'php-pear':
           ensure => installed,
@@ -139,8 +133,8 @@ class observium($install_path, $settings, $revision=unset) inherits observium::p
           before => Exec['observium-update-database']
         }
       }
-      if !defined(Package['OpenIPMI-tools']) {
-        package{'OpenIPMI-tools':
+      if !defined(Package['OpenIPMI']) {
+        package{'OpenIPMI':
           ensure => installed,
           before => Exec['observium-update-database']
         }
